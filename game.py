@@ -1,4 +1,4 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
@@ -59,4 +59,3 @@ class Game:
         self.scoreboard.increment_score()
         self.food.spawn_food()
         self.snake.get_new_part()
-

@@ -9,12 +9,7 @@ class Scoreboard(Turtle):
         super().__init__()
         self.score = 0
         with open("high_score.txt", "r") as fh:
-            high_score = fh.read()
-            if len(fh.read()):
-                high_score = int(fh.read())
-            else:
-                high_score = 0
-            self.high_score = high_score
+            self.high_score = int(fh.read())
         self.screen = screen
         self.goto(0, self.screen.window_height() / 2 - 40)
         self.color("white")
@@ -36,11 +31,3 @@ class Scoreboard(Turtle):
     def increment_score(self):
         self.score += 1
         self.update_scoreboard()
-
-    # def display_end_screen(self):
-    #     end_screen_text = Turtle()
-    #     end_screen_text.goto(0, self.screen.window_height()/2 - 100)
-    #     end_screen_text.color("white")
-    #     end_screen_text.write("GAME OVER", align="center", font=self.FONT)
-    #     end_screen_text.hideturtle()
-    #     self.screen.update()
