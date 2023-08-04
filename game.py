@@ -11,7 +11,10 @@ class Game:
         self.screen = self.init_screen()
         self.snake = Snake()
         self.food = Food()
+        with open("high_score.txt", "w") as fh:
+            fh.write("0")
         self.scoreboard = Scoreboard(self.screen)
+
         self.is_alive = False
 
     def init_screen(self):
