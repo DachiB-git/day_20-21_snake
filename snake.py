@@ -26,6 +26,13 @@ class Snake:
         body_part.goto(last_part_x + 20 * dir_x, last_part_y + 20 * dir_y)
         self.body.append(body_part)
 
+    def reset(self):
+        for part in self.body:
+            part.reset()
+        self.body = []
+        self.direction = (1, 0)
+        self.init_body()
+
     def move(self):
         head = self.body[0]
         dir_x, dir_y = self.direction

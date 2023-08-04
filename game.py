@@ -38,21 +38,22 @@ class Game:
             self.check_collision()
             self.screen.update()
             time.sleep(0.075)
-        self.scoreboard.display_end_screen()
         self.screen.exitonclick()
 
     def check_collision(self):
         head = self.snake.body[0]
-        if head.distance(self.food.food) < 15:
+        if head.distance(self.food) < 15:
             self.eat_food()
         if any(head.distance(body_part) == 0 for body_part in self.snake.body[1:]) and len(self.snake.body) > 3:
-            self.is_alive = False
+            self.scoreboard.reset()
+            self.snake.reset()
         if abs(head.xcor()) > self.screen.window_width() / 2 - 20 or \
                 abs(head.ycor()) > self.screen.window_height() / 2 - 20:
-            self.is_alive = False
+            self.scoreboard.reset()
+            self.snake.reset()
 
     def eat_food(self):
-        self.scoreboard.update_score()
+        self.scoreboard.increment_score()
         self.food.spawn_food()
         self.snake.get_new_part()
 

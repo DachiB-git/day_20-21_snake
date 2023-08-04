@@ -1,31 +1,38 @@
 from turtle import Turtle
 
 
-class Scoreboard:
+class Scoreboard(Turtle):
+
+    FONT = ('Arial', 15, 'normal')
+
     def __init__(self, screen):
+        super().__init__()
         self.score = 0
-        self.board = None
+        self.high_score = 0
         self.screen = screen
-        self.display_score(self.screen)
+        self.goto(0, self.screen.window_height() / 2 - 40)
+        self.color("white")
+        self.hideturtle()
+        self.update_scoreboard()
 
-    def update_score(self):
+    def update_scoreboard(self):
+        self.clear()
+        self.write(f"Score: {self.score}   High Score: {self.high_score}", align="center", font=self.FONT)
+
+    def reset(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        self.update_scoreboard()
+
+    def increment_score(self):
         self.score += 1
-        self.board.clear()
-        self.board.write(f"Score: {self.score}", align="center", font=('Arial', 15, 'normal'))
+        self.update_scoreboard()
 
-    def display_score(self, screen):
-        board = Turtle()
-        board.goto(0, screen.window_height() / 2 - 40)
-        board.color("white")
-        board.write(f"Score: {self.score}", align="center", font=('Arial', 15, 'normal'))
-        board.hideturtle()
-        self.board = board
-
-    def display_end_screen(self):
-        # self.screen.reset()
-        end_screen_text = Turtle()
-        end_screen_text.goto(0, self.screen.window_height()/2 - 100)
-        end_screen_text.color("white")
-        end_screen_text.write("GAME OVER", align="center", font=('Arial', 20, 'normal'))
-        end_screen_text.hideturtle()
-        self.screen.update()
+    # def display_end_screen(self):
+    #     end_screen_text = Turtle()
+    #     end_screen_text.goto(0, self.screen.window_height()/2 - 100)
+    #     end_screen_text.color("white")
+    #     end_screen_text.write("GAME OVER", align="center", font=self.FONT)
+    #     end_screen_text.hideturtle()
+    #     self.screen.update()
